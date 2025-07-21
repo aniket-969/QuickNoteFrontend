@@ -1,8 +1,8 @@
-import { Spinner } from "@/components/ui/spinner";
-import { queryConfig } from "@/lib/react-query";
+import { Spinner } from "../components/ui/spinner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { queryConfig } from './../lib/react-query';
 
 export const AppProvider = ({ children }) => {
   const [queryClient] = React.useState(

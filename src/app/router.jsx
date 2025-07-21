@@ -1,13 +1,15 @@
-import React from "react";
 import {
   createBrowserRouter,
   RouterProvider,
   Navigate,
 } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { Spinner } from "@/components/ui/spinner";
-import { paths } from "@/config/paths";
+import { Spinner} from "../components/ui/spinner.jsx"
+import { paths } from "../config/paths.js"
 import { ProtectedRoute } from "../lib/ProtectedRoute.jsx";
+import {ErrorBoundary as AppRootErrorBoundary} from "../components/appLayout.jsx"
+import React from "react";
+import { HomeRedirector } from "./routes/home.jsx";
 
 function convert(queryClient) {
   return (module) => {
@@ -57,17 +59,17 @@ export function createAppRouter(queryClient) {
         children: [
           {
             path: paths.notes.list.path,
-            lazy: () => import("./routes/notes/NotesPage.jsx").then(c),
+            lazy: () => import("./routes/app/notes/NotesPage.jsx").then(c),
             hydrateFallbackElement: <Spinner />,
           },
           {
             path: paths.notes.create.path,
-            lazy: () => import("./routes/notes/CreateNotes.jsx").then(c),
+            lazy: () => import("./routes/app/notes/CreateNotes.jsx").then(c),
             hydrateFallbackElement: <Spinner />,
           },
           {
             path: paths.notes.detail.path,
-            lazy: () => import("./routes/notes/NoteDetailPage.jsx").then(c),
+            lazy: () => import("./routes/app/notes/NoteDetail.jsx").then(c),
             hydrateFallbackElement: <Spinner />,
           },
         ],

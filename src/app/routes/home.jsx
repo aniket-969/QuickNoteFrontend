@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { paths } from "../paths";
+import { paths } from "../../config/paths";
 
 export function HomeRedirector() {
   let raw = localStorage.getItem("session");
