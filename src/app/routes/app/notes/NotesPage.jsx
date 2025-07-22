@@ -5,7 +5,6 @@ import { useNotesList } from "../../../../hooks/useNotes";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import FilterBar from "../../../../components/filterBar";
 
-
 export default function NotesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
@@ -19,9 +18,7 @@ export default function NotesPage() {
 
   if (notesQuery.isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-surface">
         <Spinner />
-      </div>
     );
   }
 

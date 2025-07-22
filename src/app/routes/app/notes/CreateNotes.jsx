@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paths } from "../../../../config/paths";
 import { Link, useNavigate } from "react-router-dom";
-import { createNoteSchema } from './../../../../schema/notes.schema';
+import { createNoteSchema } from '../../../../schema/notes.schema';
 import { useCreateNote } from "../../../../hooks/useNotes";
 
 export default function CreateNotePage() {

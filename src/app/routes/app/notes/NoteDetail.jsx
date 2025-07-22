@@ -18,9 +18,7 @@ export default function NoteDetailsPage() {
   // Combined loading state
   if (noteQuery.isLoading || tagQuery.isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-surface">
         <Spinner />
-      </div>
     );
   }
 

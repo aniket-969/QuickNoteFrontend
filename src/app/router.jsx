@@ -84,9 +84,7 @@ export function createAppRouter(queryClient) {
         path: "*",
         lazy: () => import("./routes/not-found").then(c),
         hydrateFallbackElement: (
-          <div className="flex h-screen w-screen items-center justify-center">
             <Spinner />
-          </div>
         ),
       },
     ],
