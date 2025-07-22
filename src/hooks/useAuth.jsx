@@ -59,6 +59,7 @@ const navigate = useNavigate()
     onSuccess: () => {
       queryClient.setQueryData(["auth", "session"], null);
       localStorage.removeItem("session");
+      navigate("/login")
       toast.success("Logged out successfully");
     },
     onError: (err) => {
