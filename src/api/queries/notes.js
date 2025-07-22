@@ -19,9 +19,13 @@ export const createNote = (data) =>{
   return api.post(`${BASE}`, data);
 }
 
-export const updateNote = (id, data) =>
-  api.patch(`${BASE}/${id}`, data);
+export const updateNote = (id, data)=> {
+   console.log(id,data)
+  return
+  return api.patch(`${BASE}/${id}`, data);
+}
 
-
-export const deleteNote = (id) =>
-  api.delete(`${BASE}/${id}`);
+export const deleteNote = (id) =>{
+   console.log(id)
+  return api.delete(`${BASE}/${id}`);
+}

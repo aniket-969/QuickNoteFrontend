@@ -36,27 +36,29 @@ export function useNote(noteId) {
   });
 
   // Update
-  const updateMutation = useMutation((data) => updateNote(noteId, data), {
-    onSuccess: () => {
-      toast.success("Note updated!");
-      qc.invalidateQueries(["notes"]);
-      qc.invalidateQueries(["note", noteId]);
-    },
-    onError: (err) => {
-      toast.error(err.response?.data?.message || "Failed to update note");
-    },
-  });
+const updateMutation = useMutation({
+  mutationFn: (data) => updateNote(noteId, data),
+  onSuccess: () => {
+    toast.success("Note updated!");
+    qc.invalidateQueries(["notes"]);
+    qc.invalidateQueries(["note", noteId]);
+  },
+  onError: (err) => {
+    toast.error(err.response?.data?.message || "Failed to update note");
+  },
+});
 
-  // Delete
-  const deleteMutation = useMutation(() => deleteNote(noteId), {
-    onSuccess: () => {
-      toast.success("Note deleted!");
-      qc.invalidateQueries(["notes"]);
-    },
-    onError: (err) => {
-      toast.error(err.response?.data?.message || "Failed to delete note");
-    },
-  });
+// Delete
+const deleteMutation = useMutation({
+  mutationFn: () => deleteNote(noteId),
+  onSuccess: () => {
+    toast.success("Note deleted!");
+    qc.invalidateQueries(["notes"]);
+  },
+  onError: (err) => {
+    toast.error(err.response?.data?.message || "Failed to delete note");
+  },
+});
 
   return { noteQuery, updateMutation, deleteMutation };
 }

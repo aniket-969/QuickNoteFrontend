@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { paths } from "../config/paths";
 
 export default function NoteCard({ note }) {
-  const { id, title, content, tags = [], createdAt } = note;
+
+  const { _id:id, title, content, tags = [], createdAt } = note;
   const snippet = content.length > 100 ? content.slice(0, 100) + "..." : content;
 
   return (
