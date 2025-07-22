@@ -5,8 +5,10 @@ import {
   createNote,
   updateNote,
   deleteNote,
+  fetchTags,
 } from "../api/queries/notes";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export function useNotesList(params) {
   const notesQuery = useQuery({
@@ -64,12 +66,14 @@ const deleteMutation = useMutation({
 }
 
 export function useCreateNote() {
+  const navigate = useNavigate()
   const qc = useQueryClient();
   const createNoteMutation = useMutation({
     mutationFn: (data) => createNote(data),
     onSuccess: () => {
       toast.success("Note created!");
       qc.invalidateQueries(["notes"]);
+      navigate("/notes")
     },
     onError: (err) => {
       toast.error(err.response?.data?.message || "Failed to create note");
@@ -77,3 +81,15 @@ export function useCreateNote() {
   });
   return {createNoteMutation}
 }
+
+export function useTags() {
+ const tagQuery = useQuery({
+    queryKey: ["notes", "tags"],
+    queryFn: () => fetchTags(),
+    onError: (err) => {
+      toast.error(err.response?.data?.message || "Failed to fetch note");
+    },
+  });
+  return {tagQuery}
+}
+

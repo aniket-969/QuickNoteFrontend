@@ -4,7 +4,7 @@ import { paths } from "../../config/paths";
 export function HomeRedirector() {
   let raw = localStorage.getItem("session");
   let session = raw ? JSON.parse(raw) : null;
-
+console.log(session)
   return session
     ? <Navigate to={paths.notes.list.path} replace />
     : <Navigate to={paths.auth.login.path} replace />;

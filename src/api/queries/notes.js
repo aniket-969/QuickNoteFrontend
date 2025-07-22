@@ -30,3 +30,8 @@ export const deleteNote = (id) =>{
    console.log(id)
   return api.delete(`${BASE}/${id}`);
 }
+
+export const fetchTags = async()=>{
+  const {data} = await api.get(`${BASE}/tags`)
+  return data
+}

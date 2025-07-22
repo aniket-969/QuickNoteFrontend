@@ -16,6 +16,10 @@ const navigate = useNavigate()
   const sessionQuery = useQuery({
     queryKey: ["auth", "session"],
     queryFn: fetchSession,
+     initialData: () => {
+      const raw = localStorage.getItem("session");
+      return raw ? JSON.parse(raw) : undefined;
+    },
     refetchOnWindowFocus: false,
     staleTime: 30 * 60 * 1000,
     cacheTime: 60 * 60 * 1000,

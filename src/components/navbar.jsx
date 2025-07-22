@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Sun, Moon, Plus, Home, Menu, X } from "lucide-react";
+import { Sun, Moon, Plus, Home, Menu, X, LogOut } from "lucide-react";
 import { paths } from "../config/paths";
 import { useTheme } from "../context/ThemeContext";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await logout.mutateAsync();
+    setMenuOpen(false);
+  };
 
   return (
     <nav className="bg-bg border-b border-border px-4 py-2 flex items-center justify-between relative">
@@ -17,23 +24,32 @@ export default function Navbar() {
       </Link>
 
       {/* Desktop nav items */}
-      <div className="hidden md:flex items-center space-x-4">
+      <div className="hidden md:flex items-center space-x-6">
         <Link
           to={paths.notes.create.getHref()}
           className="flex items-center px-3 py-1 bg-primary text-white rounded hover:bg-primary/90 transition"
         >
           <Plus className="w-4 h-4 mr-1" /> Create
         </Link>
+
         <button
           onClick={toggleTheme}
           aria-label="Toggle theme"
           className="p-2 rounded hover:bg-surface/50 transition"
         >
           {theme === "light" ? (
-            <Moon className="w-6 h-6" />
+            <Moon className="w-6 h-6 text-text" />
           ) : (
-            <Sun className="w-6 h-6" />
+            <Sun className="w-6 h-6 text-text" />
           )}
+        </button>
+
+        <button
+          onClick={handleLogout}
+          disabled={logout.isLoading}
+          className="flex items-center px-3 py-1 bg-destructive rounded hover:bg-destructive/90 transition disabled:opacity-50"
+        >
+          <LogOut className="w-5 h-5 text-text" />
         </button>
       </div>
 
@@ -65,12 +81,18 @@ export default function Navbar() {
           </Link>
           <button
             onClick={() => {
-              toggleTheme();
-              setMenuOpen(false);
+              toggleTheme(); setMenuOpen(false);
             }}
             className="text-left px-4 py-2 hover:bg-surface"
           >
             {theme === "light" ? "Dark Mode" : "Light Mode"}
+          </button>
+          <button
+            onClick={handleLogout}
+            disabled={logout.isLoading}
+            className="text-left px-4 py-2 hover:bg-surface disabled:opacity-50"
+          >
+            Logout
           </button>
         </div>
       )}
