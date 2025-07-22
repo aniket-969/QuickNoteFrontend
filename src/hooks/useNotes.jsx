@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 
 export function useNotesList(params) {
   const notesQuery = useQuery({
-    queryKey: ["notes", params], 
-    queryFn: () => fetchNotes(params), 
+    queryKey: ["notes", params],
+    queryFn: () => fetchNotes(params),
     refetchOnWindowFocus: false,
     onError: (err) => {
       toast.error(err.response?.data?.message || "Failed to fetch notes");
@@ -36,49 +36,42 @@ export function useNote(noteId) {
   });
 
   // Update
-  const updateMutation = useMutation(
-    (data) => updateNote(noteId, data),
-    {
-      onSuccess: () => {
-        toast.success("Note updated!");
-        qc.invalidateQueries(["notes"]);
-        qc.invalidateQueries(["note", noteId]);
-      },
-      onError: (err) => {
-        toast.error(err.response?.data?.message || "Failed to update note");
-      },
-    }
-  );
+  const updateMutation = useMutation((data) => updateNote(noteId, data), {
+    onSuccess: () => {
+      toast.success("Note updated!");
+      qc.invalidateQueries(["notes"]);
+      qc.invalidateQueries(["note", noteId]);
+    },
+    onError: (err) => {
+      toast.error(err.response?.data?.message || "Failed to update note");
+    },
+  });
 
   // Delete
-  const deleteMutation = useMutation(
-    () => deleteNote(noteId),
-    {
-      onSuccess: () => {
-        toast.success("Note deleted!");
-        qc.invalidateQueries(["notes"]);
-      },
-      onError: (err) => {
-        toast.error(err.response?.data?.message || "Failed to delete note");
-      },
-    }
-  );
+  const deleteMutation = useMutation(() => deleteNote(noteId), {
+    onSuccess: () => {
+      toast.success("Note deleted!");
+      qc.invalidateQueries(["notes"]);
+    },
+    onError: (err) => {
+      toast.error(err.response?.data?.message || "Failed to delete note");
+    },
+  });
 
   return { noteQuery, updateMutation, deleteMutation };
 }
 
 export function useCreateNote() {
   const qc = useQueryClient();
-  return useMutation(
-    (data) => createNote(data),
-    {
-      onSuccess: () => {
-        toast.success("Note created!");
-        qc.invalidateQueries(["notes"]);
-      },
-      onError: (err) => {
-        toast.error(err.response?.data?.message || "Failed to create note");
-      },
-    }
-  );
+  const createNoteMutation = useMutation({
+    mutationFn: (data) => createNote(data),
+    onSuccess: () => {
+      toast.success("Note created!");
+      qc.invalidateQueries(["notes"]);
+    },
+    onError: (err) => {
+      toast.error(err.response?.data?.message || "Failed to create note");
+    },
+  });
+  return {createNoteMutation}
 }
