@@ -42,12 +42,10 @@ const navigate = useNavigate()
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-    //  console.log(data)
-      const {token,user,message}=data
-       localStorage.setItem('eduToken', token);
-      localStorage.setItem("session", JSON.stringify(user));
-      toast.success("Login successful!");
-      navigate("/app")
+     console.log(data)
+      // localStorage.setItem("session", JSON.stringify(data));
+      // toast.success("Login successful!");
+      // navigate("/app")
     },
     onError: (err) => {
       toast.error(err.response?.data?.message || "Invalid credentials");

@@ -59,17 +59,17 @@ export function createAppRouter(queryClient) {
         children: [
           {
             path: paths.notes.list.path,
-            lazy: () => import("./routes/app/notes/NotesPage.jsx").then(c),
+            lazy: () => import("./routes/app/notes/notesPage.jsx").then(c),
             hydrateFallbackElement: <Spinner />,
           },
           {
             path: paths.notes.create.path,
-            lazy: () => import("./routes/app/notes/CreateNotes.jsx").then(c),
+            lazy: () => import("./routes/app/notes/createNotes.jsx").then(c),
             hydrateFallbackElement: <Spinner />,
           },
           {
             path: paths.notes.detail.path,
-            lazy: () => import("./routes/app/notes/NoteDetail.jsx").then(c),
+            lazy: () => import("./routes/app/notes/noteDetail.jsx").then(c),
             hydrateFallbackElement: <Spinner />,
           },
         ],
