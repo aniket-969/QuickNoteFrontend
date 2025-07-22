@@ -49,7 +49,7 @@ const navigate = useNavigate()
      console.log(data?.data)
      localStorage.setItem("session", JSON.stringify(data?.data));
      toast.success("loggedin successfully!");
-      navigate("/")
+      navigate("/notes")
     },
     onError: (err) => {
       toast.error(err.response?.data?.message || "Invalid credentials");

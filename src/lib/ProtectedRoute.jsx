@@ -1,20 +1,14 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
 import { paths } from '../config/paths';
 import { Spinner } from '../components/ui/spinner';
 
 export function ProtectedRoute() {
   const location = useLocation();
-  const { session } = useAuth();
+let raw = localStorage.getItem("session");
+  let session = raw ? JSON.parse(raw) : null;
 
-  if (session.isLoading) {
-    return <Spinner />;
-  }
-if(session.isError){
-  return <>Something went wrong ,Please refresh</>
-}
-  if (!session.data) {
+  if (!session) {
     console.log("data not found so redirecting")
     const loginPath = paths.auth.login.getHref(location.pathname);
     return <Navigate to={loginPath} replace />;
