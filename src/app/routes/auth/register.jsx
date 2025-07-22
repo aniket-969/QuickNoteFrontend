@@ -10,8 +10,7 @@ export default function RegisterPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const redirectTo =
-    searchParams.get("redirectTo") ||
-    paths.notes.list.getHref();
+    searchParams.get("redirectTo") || paths.notes.list.getHref();
   const { session, register: registerMutation } = useAuth();
 
   // If already signed in, redirect
@@ -31,12 +30,7 @@ export default function RegisterPage() {
 
   // onSubmit handler
   const onSubmit = async (values) => {
-    try {
-      await registerMutation.mutateAsync(values);
-      // navigation happens in useAuth onSuccess (redirect to login)
-    } catch {
-      // handled in useAuth
-    }
+    await registerMutation.mutateAsync(values);
   };
 
   return (
@@ -50,7 +44,10 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Name Field */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-text mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-text mb-1"
+            >
               Full Name
             </label>
             <input
@@ -67,7 +64,10 @@ export default function RegisterPage() {
 
           {/* Email Field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-text mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-text mb-1"
+            >
               Email Address
             </label>
             <input
@@ -78,13 +78,18 @@ export default function RegisterPage() {
               placeholder="you@example.com"
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+              <p className="mt-1 text-sm text-red-500">
+                {errors.email.message}
+              </p>
             )}
           </div>
 
           {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-text mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-text mb-1"
+            >
               Password
             </label>
             <input
@@ -95,7 +100,9 @@ export default function RegisterPage() {
               placeholder="••••••••"
             />
             {errors.password && (
-              <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+              <p className="mt-1 text-sm text-red-500">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
@@ -119,8 +126,11 @@ export default function RegisterPage() {
 
         {/* Login Link */}
         <p className="mt-6 text-center text-sm text-muted">
-          Already have an account?{' '}
-          <Link to={paths.auth.login.getHref(redirectTo)} className="text-primary hover:underline">
+          Already have an account?{" "}
+          <Link
+            to={paths.auth.login.getHref(redirectTo)}
+            className="text-primary hover:underline"
+          >
             Log In
           </Link>
         </p>

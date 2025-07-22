@@ -11,8 +11,7 @@ export default function LoginPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const redirectTo =
-    searchParams.get("redirectTo") ||
-    paths.notes.list.getHref();
+    searchParams.get("redirectTo") || paths.notes.list.getHref();
   const { session, login } = useAuth();
 
   if (session.data) {
@@ -31,12 +30,7 @@ export default function LoginPage() {
 
   // onSubmit handler
   const onSubmit = async (values) => {
-    try {
-      await login.mutateAsync(values);
-      // navigation happens in useAuth onSuccess
-    } catch {
-      // handled in useAuth
-    }
+    await login.mutateAsync(values);
   };
 
   return (
@@ -50,7 +44,10 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Email Field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-text mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-text mb-1"
+            >
               Email Address
             </label>
             <input
@@ -61,13 +58,18 @@ export default function LoginPage() {
               placeholder="you@example.com"
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+              <p className="mt-1 text-sm text-red-500">
+                {errors.email.message}
+              </p>
             )}
           </div>
 
           {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-text mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-text mb-1"
+            >
               Password
             </label>
             <input
@@ -78,7 +80,9 @@ export default function LoginPage() {
               placeholder="••••••••"
             />
             {errors.password && (
-              <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+              <p className="mt-1 text-sm text-red-500">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
@@ -94,15 +98,19 @@ export default function LoginPage() {
           {/* Error Feedback */}
           {login.isError && (
             <p className="mt-3 text-center text-sm text-red-500">
-              {login.error?.response?.data?.message || "Login failed. Please try again."}
+              {login.error?.response?.data?.message ||
+                "Login failed. Please try again."}
             </p>
           )}
         </form>
 
         {/* Register Link */}
         <p className="mt-6 text-center text-sm text-muted">
-          Don&rsquo;t have an account?{' '}
-          <Link to={paths.auth.register.getHref(redirectTo)} className="text-primary hover:underline">
+          Don&rsquo;t have an account?{" "}
+          <Link
+            to={paths.auth.register.getHref(redirectTo)}
+            className="text-primary hover:underline"
+          >
             Sign Up
           </Link>
         </p>
