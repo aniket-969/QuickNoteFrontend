@@ -78,22 +78,23 @@ export default function NoteDetailsPage() {
         )}
 
         <div className="flex gap-4">
-          <button
-            onClick={() => setIsEditModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition"
-          >
-            <Edit className="w-4 h-4" />
-            Edit
-          </button>
-          <button
-            onClick={handleDelete}
-            disabled={deleteMutation.isLoading}
-            className="flex items-center gap-2 px-4 py-2 bg-destructive text-white rounded hover:bg-destructive/90 transition disabled:opacity-50"
-          >
-            <Trash2 className="w-4 h-4" />
-            Delete
-          </button>
-        </div>
+  <button
+    onClick={() => setIsEditModalOpen(true)}
+    className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition"
+  >
+    <Edit className="w-4 h-4" />
+    Edit
+  </button>
+  <button
+    onClick={handleDelete}
+    disabled={deleteMutation.isLoading}
+    className="flex items-center gap-2 px-4 py-2 bg-destructive text-destructive-foreground rounded hover:bg-destructive/90 transition disabled:opacity-50"
+  >
+    <Trash2 className="w-4 h-4" />
+    Delete
+  </button>
+</div>
+
       </div>
 
       {isEditModalOpen && (
