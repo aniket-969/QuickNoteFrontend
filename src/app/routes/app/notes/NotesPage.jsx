@@ -29,7 +29,7 @@ export default function NotesPage() {
   const notes = notesQuery.data || []; 
 
   return (
-    <div className="min-h-screen bg-surface text-text p-6">
+    <div className=" bg-surface text-text p-6">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Your Notes</h1>

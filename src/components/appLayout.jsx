@@ -21,7 +21,7 @@ export function ErrorBoundary() {
 export function AppLayout() {
     
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen ">
       <div className="flex-1 flex flex-col">
         <Navbar />   
         <main className="p-4 flex-1 overflow-auto">

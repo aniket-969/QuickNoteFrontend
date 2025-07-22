@@ -38,3 +38,7 @@
     background-color: var(--color-surface);
   }
 }
+
+.bb{
+  border: 2px solid blue
+}
