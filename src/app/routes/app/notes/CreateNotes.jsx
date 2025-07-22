@@ -25,7 +25,7 @@ export default function CreateNotePage() {
 
   const onSubmit = async (values) => {
    
-    // await createNoteMutation.mutateAsync(values);
+    await createNoteMutation.mutateAsync(values);
     
   };
 

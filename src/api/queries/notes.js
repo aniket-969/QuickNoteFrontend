@@ -13,9 +13,11 @@ export const fetchNote = (id) =>
   api.get(`${BASE}/${id}`);
 
 
-export const createNote = (data) =>
-  api.post(`${BASE}`, data);
-
+export const createNote = (data) =>{
+  console.log(data)
+  
+  return api.post(`${BASE}`, data);
+}
 
 export const updateNote = (id, data) =>
   api.patch(`${BASE}/${id}`, data);
