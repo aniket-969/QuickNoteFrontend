@@ -21,7 +21,6 @@ export const createNote = (data) =>{
 
 export const updateNote = (id, data)=> {
    console.log(id,data)
-  return
   return api.patch(`${BASE}/${id}`, data);
 }
 
