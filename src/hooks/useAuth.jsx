@@ -30,7 +30,7 @@ const navigate = useNavigate()
     onSuccess: (data) => {
       //console.log(data)
       toast.success("Registration successful!");
-      navigate('/auth/login')
+      navigate('/login')
     },
     onError: (err) => {
       toast.error(err.response?.data?.message || "Something went wrong");
@@ -42,10 +42,10 @@ const navigate = useNavigate()
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-     console.log(data)
-      // localStorage.setItem("session", JSON.stringify(data));
-      // toast.success("Login successful!");
-      // navigate("/app")
+     console.log(data?.data)
+     localStorage.setItem("session", JSON.stringify(data?.data));
+     toast.success("loggedin successfully!");
+      navigate("/")
     },
     onError: (err) => {
       toast.error(err.response?.data?.message || "Invalid credentials");
