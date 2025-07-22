@@ -9,8 +9,10 @@ export const fetchNotes = async (params = {}) => {
   return response?.data; 
 };
 
-export const fetchNote = (id) =>
-  api.get(`${BASE}/${id}`);
+export const fetchNote = async (id) => {
+  const { data } = await api.get(`${BASE}/${id}`);
+  return data;
+};
 
 
 export const createNote = (data) =>{

@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Outlet, useRouteError } from "react-router-dom";
+import Navbar from "./navbar";
 
 export function ErrorBoundary() {
   const error = useRouteError();
@@ -18,6 +19,7 @@ export function ErrorBoundary() {
 }
 
 export function AppLayout() {
+    
   return (
     <div className="flex h-screen">
       <div className="flex-1 flex flex-col">

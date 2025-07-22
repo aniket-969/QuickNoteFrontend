@@ -1,14 +1,13 @@
+import React from "react";
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate,
 } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { Spinner} from "../components/ui/spinner.jsx"
-import { paths } from "../config/paths.js"
+import { Spinner } from "../components/ui/spinner.jsx";
+import { paths } from "../config/paths.js";
 import { ProtectedRoute } from "../lib/ProtectedRoute.jsx";
-import {ErrorBoundary as AppRootErrorBoundary} from "../components/appLayout.jsx"
-import React from "react";
+import { AppLayout, ErrorBoundary as AppRootErrorBoundary } from "../components/appLayout.jsx";
 import { HomeRedirector } from "./routes/home.jsx";
 
 function convert(queryClient) {
@@ -28,11 +27,10 @@ export function createAppRouter(queryClient) {
 
   return createBrowserRouter(
     [
-      // Public routes
+      // ── Public routes ──
       {
         path: paths.home.path,
         element: <HomeRedirector />,
-        
       },
       {
         path: paths.auth.register.path,
@@ -53,29 +51,35 @@ export function createAppRouter(queryClient) {
         ),
       },
 
-      // Protected /app routes
-   {
+      // ── Protected routes ──
+      {
         element: <ProtectedRoute />,
+        errorElement: <AppRootErrorBoundary />,
         children: [
           {
-            path: paths.notes.list.path,
-            lazy: () => import("./routes/app/notes/notesPage.jsx").then(c),
-            hydrateFallbackElement: <Spinner />,
-          },
-          {
-            path: paths.notes.create.path,
-            lazy: () => import("./routes/app/notes/createNotes.jsx").then(c),
-            hydrateFallbackElement: <Spinner />,
-          },
-          {
-            path: paths.notes.detail.path,
-            lazy: () => import("./routes/app/notes/noteDetail.jsx").then(c),
-            hydrateFallbackElement: <Spinner />,
+            element: <AppLayout />,
+            children: [
+              {
+                path: paths.notes.list.path,
+                lazy: () => import("./routes/app/notes/notesPage.jsx").then(c),
+                hydrateFallbackElement: <Spinner />,
+              },
+              {
+                path: paths.notes.create.path,
+                lazy: () => import("./routes/app/notes/createNotes.jsx").then(c),
+                hydrateFallbackElement: <Spinner />,
+              },
+              {
+                path: paths.notes.detail.path,
+                lazy: () => import("./routes/app/notes/noteDetail.jsx").then(c),
+                hydrateFallbackElement: <Spinner />,
+              },
+            ],
           },
         ],
       },
 
-      // Catch-all 404
+      // ── Catch-all 404 ──
       {
         path: "*",
         lazy: () => import("./routes/not-found").then(c),
@@ -98,5 +102,6 @@ export function AppRouter() {
     () => createAppRouter(queryClient),
     [queryClient]
   );
+
   return <RouterProvider router={router} />;
 }

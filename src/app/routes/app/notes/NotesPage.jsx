@@ -33,12 +33,7 @@ export default function NotesPage() {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Your Notes</h1>
-          <Link
-            to={paths.notes.create.getHref()}
-            className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition"
-          >
-            New Note
-          </Link>
+         
         </div>
 
         {notes.length === 0 ? (

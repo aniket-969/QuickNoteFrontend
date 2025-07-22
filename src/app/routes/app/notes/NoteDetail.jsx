@@ -16,7 +16,7 @@ export default function NoteDetailsPage() {
   const handleDelete = async () => {
    
       await deleteMutation.mutateAsync();
-      
+
       navigate(paths.notes.list.getHref());
     
   };
@@ -39,7 +39,7 @@ export default function NoteDetailsPage() {
     );
   }
 
-  const note = noteQuery?.data?.data;
+  const note = noteQuery?.data
 
   return (
     <div className="min-h-screen bg-surface text-text p-6">
